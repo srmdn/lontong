@@ -29,7 +29,7 @@ export function Hero() {
             <span className="relative inline-flex h-2 w-2 rounded-full bg-deep-red" />
           </span>
           <span className="text-xs sm:text-sm tracking-[0.15em] uppercase text-text-dark/60 font-medium">
-            Open Source &middot; Buatan Indonesia
+            Open Source
           </span>
         </motion.div>
 

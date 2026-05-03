@@ -3,35 +3,36 @@ import { render, screen } from '@testing-library/react'
 import { ComparisonTable } from './ComparisonTable'
 
 describe('ComparisonTable', () => {
-  it('renders all 6 data rows + header', () => {
+  it('renders all 6 feature rows', () => {
     render(<ComparisonTable />)
-    const rows = screen.getAllByRole('row')
-    expect(rows).toHaveLength(7)
-  })
-
-  it('shows correct column headers', () => {
-    render(<ComparisonTable />)
-    expect(screen.getByText('Fitur')).toBeTruthy()
-    expect(screen.getAllByText(/cPanel/).length).toBeGreaterThan(0)
-    expect(screen.getByText('Control Panel Lain')).toBeTruthy()
-    expect(screen.getByText('Lontong (LPanel)')).toBeTruthy()
-  })
-
-  it('contains Arsitektur row with Go', () => {
-    render(<ComparisonTable />)
+    // Each feature is a heading
     expect(screen.getByText('Arsitektur')).toBeTruthy()
+    expect(screen.getByText('Resource (RAM)')).toBeTruthy()
+    expect(screen.getByText('Web Server')).toBeTruthy()
+    expect(screen.getByText('HTTPS/SSL')).toBeTruthy()
+    expect(screen.getByText('Config Update')).toBeTruthy()
+    expect(screen.getByText('Biaya')).toBeTruthy()
+  })
+
+  it('shows panel labels', () => {
+    render(<ComparisonTable />)
+    const lontongLabels = screen.getAllByText('Lontong')
+    expect(lontongLabels.length).toBeGreaterThanOrEqual(6)
+    expect(screen.getAllByText('cPanel').length).toBeGreaterThanOrEqual(6)
+  })
+
+  it('contains bar chart with Go', () => {
+    render(<ComparisonTable />)
     expect(screen.getByText(/Go \(Single Binary\)/)).toBeTruthy()
   })
 
-  it('contains Biaya row with Gratis', () => {
+  it('contains Biaya with Gratis', () => {
     render(<ComparisonTable />)
-    expect(screen.getByText('Biaya')).toBeTruthy()
     expect(screen.getByText(/100% Gratis/)).toBeTruthy()
   })
 
-  it('has overflow-x-auto for mobile scroll', () => {
-    const { container } = render(<ComparisonTable />)
-    const wrapper = container.querySelector('.overflow-x-auto')
-    expect(wrapper).toBeTruthy()
+  it('renders section heading', () => {
+    render(<ComparisonTable />)
+    expect(screen.getByText(/What you get with Lontong/)).toBeTruthy()
   })
 })
