@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-feature-settings: 'cv11' on, 'cv05' on;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.03em;
+  }
+  p {
+    letter-spacing: -0.01em;
+  }
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.9em;
+  }
+}
+
+@theme {
+  --color-deep-red: #991B1B;
+  --color-deep-red-light: #B91C1C;
+  --color-deep-red-dark: #7F1D1D;
+  --color-surface-light: #FAFAFA;
+  --color-surface-dark: #0F0F12;
+  --color-text-light: #1A1A2E;
+  --color-text-dark: #E4E4E7;
+  --color-muted-light: #71717A;
+  --color-muted-dark: #A1A1AA;
+  --color-border-light: #E4E4E7;
+  --color-border-dark: #27272A;
+  --color-dot: #27272A;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+html {
+  transition: background-color 400ms ease-in-out, color 400ms ease-in-out;
+}
+
+html:not(.dark) body {
+  background-color: var(--color-surface-light);
+}
+
+html.dark body {
+  background-color: var(--color-surface-dark);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+@media print {
+  html, html.dark { background: white !important; color: black !important; }
+}

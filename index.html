@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Flash prevention: set dark class before ANY paint -->
+    <script>
+      (function() {
+        try {
+          var theme = JSON.parse(localStorage.getItem('lontong-theme'));
+          if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+          }
+        } catch(e) {
+          if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+          }
+        }
+      })();
+    </script>
+
+    <title>Lontong (LPanel) — Kelola Server Tanpa Beban</title>
+    <meta name="description" content="Control panel open-source yang dibangun dengan Go dan Caddy. Ringan untuk VPS kecil, tangguh untuk traffic besar." />
+
+    <meta property="og:title" content="Lontong (LPanel) — Kelola Server Tanpa Beban" />
+    <meta property="og:description" content="Control panel open-source yang dibangun dengan Go dan Caddy. Ringan untuk VPS kecil, tangguh untuk traffic besar." />
+    <meta property="og:type" content="website" />
+
+    <meta name="theme-color" content="#FAFAFA" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0F0F12" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <noscript>
+      <div style="max-width:600px;margin:40px auto;padding:20px;font-family:system-ui,sans-serif;text-align:center;">
+        <h1 style="color:#991B1B;font-size:2rem;">Lontong (LPanel)</h1>
+        <p style="font-size:1.2rem;color:#1A1A2E;">Kelola Server Tanpa Beban.</p>
+        <p style="color:#71717A;">Control panel open-source yang dibangun dengan Go dan Caddy. Ringan untuk VPS kecil, tangguh untuk traffic besar.</p>
+        <pre style="background:#0F0F12;color:#4ade80;padding:16px;border-radius:8px;text-align:left;overflow-x:auto;font-size:0.9rem;">$ curl -sSL https://raw.githubusercontent.com/username/lontong/main/install.sh | bash</pre>
+        <p style="font-size:0.8rem;color:#71717A;">JavaScript diperlukan untuk pengalaman interaktif penuh.</p>
+      </div>
+    </noscript>
+
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
