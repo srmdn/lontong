@@ -15,7 +15,7 @@ describe('CliTerminal', () => {
 
   it('has a copy button', () => {
     render(<CliTerminal />)
-    expect(screen.getByRole('button')).toBeTruthy()
+    expect(screen.getByRole('button', { name: /copy install command/i })).toBeTruthy()
   })
 
   it('copies command to clipboard on click', async () => {
@@ -33,5 +33,11 @@ describe('CliTerminal', () => {
     render(<CliTerminal />)
     await userEvent.click(screen.getByRole('button'))
     expect(screen.getByText(/Copied/)).toBeTruthy()
+  })
+
+  it('renders preflight checklist content', () => {
+    render(<CliTerminal />)
+    expect(screen.getByText(/Preflight checklist/)).toBeTruthy()
+    expect(screen.getByText(/Gunakan staging VPS terlebih dahulu/)).toBeTruthy()
   })
 })

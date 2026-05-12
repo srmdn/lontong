@@ -1,11 +1,12 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { ThemeProvider } from '../context/ThemeContext'
+import type { ReactNode } from 'react'
 
 vi.mock('framer-motion', () => ({
   motion: { div: 'div', section: 'section', h1: 'h1', p: 'p' },
   useReducedMotion: () => false,
-  AnimatePresence: ({ children }: any) => children,
+  AnimatePresence: ({ children }: { children: ReactNode }) => children,
 }))
 
 import { Hero } from './Hero'
@@ -39,13 +40,13 @@ describe('Hero', () => {
 
   it('renders sub-headline', () => {
     render(<ThemeProvider><Hero /></ThemeProvider>)
-    expect(screen.getByText(/Go dan Caddy/)).toBeTruthy()
+    expect(screen.getByText(/workflow inti/i)).toBeTruthy()
   })
 
-  it('H1 renders on dark background', () => {
+  it('H1 renders updated positioning text', () => {
     render(<ThemeProvider><Hero /></ThemeProvider>)
     const h1 = screen.getByRole('heading', { level: 1 })
-    expect(h1.textContent).toContain('Kelola Server Tanpa Beban')
+    expect(h1.textContent).toContain('Alternatif cPanel')
     expect(h1.className).toContain('text-text-dark')
   })
 })

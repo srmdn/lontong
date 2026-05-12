@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { TAGLINE, SUBHEADLINE } from '../data'
+import { PROOF_METRICS, SUBHEADLINE, TAGLINE } from '../data'
 
 export function Hero() {
   return (
@@ -16,7 +16,7 @@ export function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 py-32 sm:py-40 lg:py-48 text-center">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-28 sm:py-36 lg:py-44 text-center">
         {/* Micro-label */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -38,9 +38,10 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-[-0.04em] text-text-dark"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-[-0.04em] text-text-dark max-w-5xl mx-auto"
         >
-          {TAGLINE.split('.')[0]}
+          Alternatif cPanel
+          <span className="text-deep-red">,</span> fokus workflow
           <span className="text-deep-red">.</span>
         </motion.h1>
 
@@ -49,32 +50,51 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-8 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed text-text-dark/60 font-light tracking-[-0.01em]"
+          className="mt-8 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed text-text-dark/65 font-light tracking-[-0.01em]"
         >
-          {SUBHEADLINE}
+          {TAGLINE} {SUBHEADLINE}
         </motion.p>
 
-        {/* Stat pills */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-16 flex flex-wrap items-center justify-center gap-6 sm:gap-10"
+          className="mt-12 flex flex-wrap items-center justify-center gap-4"
         >
-          <div className="text-center">
-            <div className="text-3xl sm:text-4xl font-bold tracking-[-0.03em] text-text-dark">&lt;100MB</div>
-            <div className="mt-1 text-xs tracking-[0.1em] uppercase text-text-dark/40">RAM Usage</div>
-          </div>
-          <div className="w-px h-12 bg-text-dark/10" />
-          <div className="text-center">
-            <div className="text-3xl sm:text-4xl font-bold tracking-[-0.03em] text-text-dark">Go</div>
-            <div className="mt-1 text-xs tracking-[0.1em] uppercase text-text-dark/40">Single Binary</div>
-          </div>
-          <div className="w-px h-12 bg-text-dark/10" />
-          <div className="text-center">
-            <div className="text-3xl sm:text-4xl font-bold tracking-[-0.03em] text-text-dark">0</div>
-            <div className="mt-1 text-xs tracking-[0.1em] uppercase text-text-dark/40">Downtime</div>
-          </div>
+          <a
+            href="#try"
+            className="inline-flex items-center rounded-md bg-deep-red px-5 py-2.5 text-sm font-semibold tracking-[0.04em] uppercase text-white hover:bg-deep-red-light transition-colors"
+          >
+            Try on Staging VPS
+          </a>
+          <a
+            href="https://github.com/srmdn/lontong"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center rounded-md border border-text-dark/20 bg-black/20 px-5 py-2.5 text-sm font-semibold tracking-[0.04em] uppercase text-text-dark hover:bg-black/35 transition-colors"
+          >
+            Read Docs
+          </a>
+        </motion.div>
+
+        {/* Proof strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
+          className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left"
+        >
+          {PROOF_METRICS.map((metric) => (
+            <article
+              key={metric.label}
+              className="rounded-lg border border-white/[0.08] bg-black/25 backdrop-blur-sm px-4 py-4"
+            >
+              <p className="text-[11px] tracking-[0.08em] uppercase text-text-dark/45">{metric.label}</p>
+              <p className="mt-2 text-xl font-semibold text-text-dark">{metric.value}</p>
+              <p className="mt-1 text-xs text-text-dark/55">{metric.note}</p>
+            </article>
+          ))}
         </motion.div>
       </div>
 

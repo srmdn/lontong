@@ -1,76 +1,41 @@
-import { useState, useEffect, useRef } from 'react'
-import { DASHBOARD_STATS } from '../data'
-
-function AnimatedCounter({ value, unit }: { value: number; unit: string }) {
-  const [count, setCount] = useState(0)
-  const [hasAnimated, setHasAnimated] = useState(false)
-  const ref = useRef<HTMLSpanElement>(null)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el || hasAnimated) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          const duration = 1000
-          const steps = 30
-          const increment = value / steps
-          let current = 0
-          const timer = setInterval(() => {
-            current += increment
-            if (current >= value) {
-              setCount(value)
-              clearInterval(timer)
-            } else {
-              setCount(Math.floor(current))
-            }
-          }, duration / steps)
-          setHasAnimated(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.3 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [value, hasAnimated])
-
-  return <span ref={ref}>{count}{unit}</span>
-}
+import { WORKFLOW_ITEMS } from '../data'
 
 export function DashboardMockup() {
   return (
-    <section className="py-28 sm:py-36" aria-label="Dashboard mockup">
-      <div className="max-w-5xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-[-0.03em] text-center mb-12 text-text-dark">
-          Dashboard Ringan &amp; Informatif
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {DASHBOARD_STATS.map((stat) => (
-            <div
-              key={stat.label}
+    <section className="py-28 sm:py-36" aria-label="Core workflow">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-14">
+          <p className="text-xs tracking-[0.18em] uppercase text-text-dark/45 font-medium mb-4">
+            Core Workflows
+          </p>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-[-0.03em] text-text-dark">
+            Alur yang harus cepat untuk operator
+          </h2>
+          <p className="mt-4 max-w-3xl mx-auto text-sm sm:text-base text-text-dark/60">
+            Fokus pada tugas berulang yang biasanya menyita waktu di panel lama.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {WORKFLOW_ITEMS.map((item) => (
+            <article
+              key={item.task}
               role="status"
-              aria-label={`${stat.label}: ${stat.value}${stat.unit}`}
-              className="rounded-xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm p-6 sm:p-7 hover:bg-white/[0.05] transition-colors duration-300"
+              aria-label={`${item.task}: ${item.eta}`}
+              className="rounded-xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm p-6 sm:p-7"
             >
-              <div className="text-sm text-text-dark/50 mb-2">{stat.label}</div>
-              <div className="text-3xl font-bold text-text-dark mb-4">
-                <AnimatedCounter value={stat.value} unit={stat.unit} />
+              <div className="flex items-start justify-between gap-4">
+                <h3 className="text-lg font-semibold tracking-[-0.02em] text-text-dark">{item.task}</h3>
+                <span className="rounded-sm bg-deep-red/90 px-2.5 py-1 text-[11px] uppercase tracking-[0.08em] font-semibold text-white">
+                  {item.eta}
+                </span>
               </div>
-              <div className="w-full h-2 bg-white/[0.08] rounded-full overflow-hidden">
-                <div
-                  className="h-full rounded-full transition-all duration-1000"
-                  style={{
-                    width: `${(stat.value / stat.max) * 100}%`,
-                    backgroundColor: stat.color,
-                  }}
-                />
+              <p className="mt-3 text-sm text-text-dark/70">{item.goal}</p>
+              <div className="mt-5 h-2 w-full rounded-full bg-white/[0.08] overflow-hidden">
+                <div className="h-full rounded-full bg-deep-red/85 w-[72%]" />
               </div>
-              <div className="text-xs text-text-dark/40 mt-1 text-right">
-                {stat.value}{stat.unit} / {stat.max}{stat.unit}
-              </div>
-            </div>
+              <p className="mt-3 text-xs text-text-dark/45">{item.outcome}</p>
+            </article>
           ))}
         </div>
       </div>

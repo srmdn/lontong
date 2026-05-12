@@ -3,36 +3,30 @@ import { render, screen } from '@testing-library/react'
 import { ComparisonTable } from './ComparisonTable'
 
 describe('ComparisonTable', () => {
-  it('renders all 6 feature rows', () => {
+  it('renders benchmark rows', () => {
     render(<ComparisonTable />)
-    // Each feature is a heading
-    expect(screen.getByText('Arsitektur')).toBeTruthy()
-    expect(screen.getByText('Resource (RAM)')).toBeTruthy()
-    expect(screen.getByText('Web Server')).toBeTruthy()
-    expect(screen.getByText('HTTPS/SSL')).toBeTruthy()
-    expect(screen.getByText('Config Update')).toBeTruthy()
-    expect(screen.getByText('Biaya')).toBeTruthy()
+    expect(screen.getByText('Idle RAM (benchmark internal)')).toBeTruthy()
+    expect(screen.getByText('Provision Domain + SSL')).toBeTruthy()
+    expect(screen.getByText('Deploy aplikasi kecil')).toBeTruthy()
+    expect(screen.getByText('Perubahan config runtime')).toBeTruthy()
   })
 
   it('shows panel labels', () => {
     render(<ComparisonTable />)
     const lontongLabels = screen.getAllByText('Lontong')
-    expect(lontongLabels.length).toBeGreaterThanOrEqual(6)
-    expect(screen.getAllByText('cPanel').length).toBeGreaterThanOrEqual(6)
+    expect(lontongLabels.length).toBeGreaterThanOrEqual(4)
+    expect(screen.getAllByText('cPanel').length).toBeGreaterThanOrEqual(4)
   })
 
-  it('contains bar chart with Go', () => {
+  it('contains benchmark values for lontong', () => {
     render(<ComparisonTable />)
-    expect(screen.getByText(/Go \(Single Binary\)/)).toBeTruthy()
-  })
-
-  it('contains Biaya with Gratis', () => {
-    render(<ComparisonTable />)
-    expect(screen.getByText(/100% Gratis/)).toBeTruthy()
+    expect(screen.getByText('< 100MB')).toBeTruthy()
+    expect(screen.getByText('2-3 menit')).toBeTruthy()
   })
 
   it('renders section heading', () => {
     render(<ComparisonTable />)
-    expect(screen.getByText(/What you get with Lontong/)).toBeTruthy()
+    expect(screen.getByText(/Bukti performa dan batas kompatibilitas/)).toBeTruthy()
+    expect(screen.getByText('Works now')).toBeTruthy()
   })
 })

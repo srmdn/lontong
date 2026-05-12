@@ -3,22 +3,21 @@ import { render, screen } from '@testing-library/react'
 import { DashboardMockup } from './DashboardMockup'
 
 describe('DashboardMockup', () => {
-  it('renders 3 widgets', () => {
+  it('renders workflow cards', () => {
     render(<DashboardMockup />)
-    const widgets = screen.getAllByRole('status')
-    expect(widgets).toHaveLength(3)
+    const cards = screen.getAllByRole('status')
+    expect(cards).toHaveLength(6)
   })
 
-  it('shows CPU, RAM, Disk labels', () => {
+  it('shows key workflow labels', () => {
     render(<DashboardMockup />)
-    expect(screen.getByText(/CPU/)).toBeTruthy()
-    expect(screen.getByText(/Memory/)).toBeTruthy()
-    expect(screen.getByText(/Disk/)).toBeTruthy()
+    expect(screen.getByText(/Domain dan SSL/)).toBeTruthy()
+    expect(screen.getByText(/Deploy Site/)).toBeTruthy()
+    expect(screen.getByText(/Backup dan Restore/)).toBeTruthy()
   })
 
-  it('widgets have aria-labels with values', () => {
+  it('cards have aria-labels with eta values', () => {
     render(<DashboardMockup />)
-    const cpu = screen.getByLabelText(/CPU Usage: 23%/)
-    expect(cpu).toBeTruthy()
+    expect(screen.getByLabelText(/Domain dan SSL: 2-3 menit/)).toBeTruthy()
   })
 })
