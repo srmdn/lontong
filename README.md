@@ -4,11 +4,15 @@ Modern, lightweight, open-source server control panel. Built with Go and Caddy.
 
 **Padat fiturnya, ringan servernya, nggak bikin kantong bolong.**
 
+> **This repository is the landing page, not the panel.** The Go backend is still in development and is not published here yet. What you can install and run from this repo today is the site itself, described below.
+
 ---
 
 ## Why Lontong
 
 Server control panels are heavy, expensive, and complicated. Lontong takes a different approach: a single Go binary paired with Caddy for zero-config HTTPS. No Perl legacy, no Python dependencies, no license fees.
+
+The points below are the design targets the backend is being built against, not measured results of a released build.
 
 - **< 100MB RAM** at idle. Runs comfortably on the smallest VPS.
 - **Go single binary**. No runtime, no interpreter, no package manager needed.
